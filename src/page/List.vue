@@ -19,7 +19,96 @@
             	<div class="line"></div>
             	<div class="date-icon"></div>
             </div>
-            <div class=""></div>
+            <div class="listBox">
+            	<div class="picture"><img src="image/tucao.png"></div>
+				<p class="abstract">111111111111111111111111111111111111111111111111111111111111111111111111</p>
+				<div class="follow">
+					<div class="time">2016-11-30</div>
+					<div class="read">
+						<div class="icon"><img src="image/ydIcon.png"></div>
+						<div class="number">100</div>
+					</div>
+					<div class="read">
+						<div class="icon"><img src="image/plIcon.png"></div>
+						<div class="number">200</div>
+					</div>
+				</div>
+            </div>
+            <div class="listBox">
+            	<div class="picture"><img src="image/tucao.png"></div>
+				<p class="abstract">111111111111111111111111111111111111111111111111111111111111111111111111</p>
+				<div class="follow">
+					<div class="time">2016-11-30</div>
+					<div class="read">
+						<div class="icon"><img src="image/ydIcon.png"></div>
+						<div class="number">100</div>
+					</div>
+					<div class="read">
+						<div class="icon"><img src="image/plIcon.png"></div>
+						<div class="number">200</div>
+					</div>
+				</div>
+            </div>
+            <div class="listBox">
+            	<div class="picture"><img src="image/tucao.png"></div>
+				<p class="abstract">111111111111111111111111111111111111111111111111111111111111111111111111</p>
+				<div class="follow">
+					<div class="time">2016-11-30</div>
+					<div class="read">
+						<div class="icon"><img src="image/ydIcon.png"></div>
+						<div class="number">100</div>
+					</div>
+					<div class="read">
+						<div class="icon"><img src="image/plIcon.png"></div>
+						<div class="number">200</div>
+					</div>
+				</div>
+            </div>
+            <div class="listBox">
+            	<div class="picture"><img src="image/tucao.png"></div>
+				<p class="abstract">111111111111111111111111111111111111111111111111111111111111111111111111</p>
+				<div class="follow">
+					<div class="time">2016-11-30</div>
+					<div class="read">
+						<div class="icon"><img src="image/ydIcon.png"></div>
+						<div class="number">100</div>
+					</div>
+					<div class="read">
+						<div class="icon"><img src="image/plIcon.png"></div>
+						<div class="number">200</div>
+					</div>
+				</div>
+            </div>
+            <div class="listBox">
+            	<div class="picture"><img src="image/tucao.png"></div>
+				<p class="abstract">111111111111111111111111111111111111111111111111111111111111111111111111</p>
+				<div class="follow">
+					<div class="time">2016-11-30</div>
+					<div class="read">
+						<div class="icon"><img src="image/ydIcon.png"></div>
+						<div class="number">100</div>
+					</div>
+					<div class="read">
+						<div class="icon"><img src="image/plIcon.png"></div>
+						<div class="number">200</div>
+					</div>
+				</div>
+            </div>
+            <div class="listBox">
+            	<div class="picture"><img src="image/tucao.png"></div>
+				<p class="abstract">111111111111111111111111111111111111111111111111111111111111111111111111</p>
+				<div class="follow">
+					<div class="time">2016-11-30</div>
+					<div class="read">
+						<div class="icon"><img src="image/ydIcon.png"></div>
+						<div class="number">100</div>
+					</div>
+					<div class="read">
+						<div class="icon"><img src="image/plIcon.png"></div>
+						<div class="number">200</div>
+					</div>
+				</div>
+            </div>
         </div>
         <my-nav></my-nav>
         <!--<my-sideBar></my-sideBar>-->
@@ -88,6 +177,7 @@
 	}
 	.dateBox{
 		height:18px;
+		margin-bottom: 25px;
 	}
 	.spot{
 		width: 4px;
@@ -114,6 +204,55 @@
 		height: 18px;
 		margin-left: 5px;
 		float: right;
+	}
+	.listBox{
+		width: 370px;
+		height: 340px;
+		margin-right: 30px;
+		margin-bottom: 40px;
+		float: left;
+		border-bottom: 1px solid #e1e1e1;
+		background: #fff;
+	}
+	.picture{
+		width:370px;
+		height:236px;
+	}
+	.abstract{
+		font-size:16px;
+		margin: 0 15px;
+		line-height: 24px;
+		color:#606060;
+		word-wrap:break-word;
+		word-break:normal;
+	}
+	.follow{
+		height:20px;
+		margin: 20px 15px 0;
+	}
+	.follow span{
+		margin:0 5px;
+	}
+	.read{
+		float:right;
+		margin-left: 30px;
+	}
+	.icon{
+		width:14px;
+		height:14px;
+		margin: 3px 5px 0 0;
+		float:left;
+	}
+	.number{
+		float:left;
+		font-size:14px;
+		color:#bdbdbf;
+		margin-right:15px;
+	}
+	.time{
+		float:left;
+		font-size:14px;
+		color:#999;
 	}
 </style>
 

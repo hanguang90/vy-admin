@@ -32,17 +32,17 @@
 			<div class="menu">
                 <img src="../assets/images/article-icon.png" >
                 知识管理
-                <div class="add"></div>
+                <div class="add"><img src="../assets/images/add.png" ></div>
             </div>
             <div class="menu">
                 <img src="../assets/images/activity-icon.png" >
                 网络管理
-                <div class="add"></div>
+                <div class="add"><img src="../assets/images/add.png" ></div>
             </div>
             <div class="menu">
                 <img src="../assets/images/service-icon.png" >
                 微信管理
-                <div class="add"></div>
+                <div class="add"><img src="../assets/images/add.png" ></div>
             </div>
         </div>
         
@@ -162,6 +162,7 @@
     .menu {
     	width: 266px;
     	height: 60px;
+    	line-height: 60px;
     	margin: 20px auto 0;
         padding-left: 82px;
         text-align: left;
@@ -171,10 +172,18 @@
     }
     .menu img{
     	vertical-align: top;
-    	margin-top: ;
+    	margin-top: 17px;
     }
     .add{
-    	width: ;
+    	width: 20px;
+    	height: 20px;
+    	float: right;
+    	margin-top: 20px;
+    	margin-right: 20px;
+    	background: #3971dd;
+    }
+    .add img{
+    	margin-top: 0px;
     }
     .wBadge{
         margin-left: 50px;

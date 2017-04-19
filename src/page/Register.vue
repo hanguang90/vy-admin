@@ -248,11 +248,11 @@
     	line-height: 48px;
     }
     .sConten{
-    	width: 514px;
+    	width: 600px;
 		max-height: 360px;
     	position: absolute;
     	top: 50px;
-    	left: 84px;
+    	left: 0px;
     	box-shadow: 0 5px 10px #aaa;
     	background: #fff;
     	overflow-y: auto;
@@ -260,6 +260,10 @@
     .sConten li{
     	padding: 10px 15px 5px;
     	border-bottom: 1px solid #eee;
+    }
+    .sConten li:hover{
+    	cursor: pointer;
+    	background: #ccc;
     }
     .s-title{
     	line-height: 20px;

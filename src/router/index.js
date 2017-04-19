@@ -38,7 +38,7 @@ export default new Router({
         {
         path: '/Hello',
         component: Hello,
-        meta: {auth: true, title: "欢迎",flag: true}
+        meta: {auth: true, title: "欢迎"}
       },{
           path: '/Test',
           component: Test,

@@ -5,27 +5,31 @@
     <div class="login">
     	<div class="header"><img src="../assets/images/LOGO.png" ></div>
         <div class="loginType">
-            <div class="codeLogin" :class="{hide: 1 != loginType}">
-            	<div class="container">
-            		
-            	</div>
-                <div class="content">
-                    <span>手机登录</span>
-                    <Form ref="loginIfon" :model="loginIfon" :rules="ruleInline" inline>
-                        <Form-item prop="phoneNumber">
-                    <Input v-model="loginIfon.phoneNumber" placeholder="请输入手机号" style="width: 263px;height:40px;margin-top:25px;"></Input>
-                            </Form-item>
-                    <div class="sliderBox">
-                    	<div id="slider" @mousedown="slideVerification" v-bind:style="{ marginLeft: ii + 'px'}"></div>
-                    </div>
-                    <div class="verBox"><input id="p-code" v-model="loginIfon.phoneCode" placeholder="请输入手机验证码" type="text"></input>
-                    	<button id="obtain-code" @click="getValidCode('loginIfon')" v-if="isDisabled" style="outline:none;cursor:pointer;">获取验证码</button>
-                    	<button id="obtain-code"  v-else disabled v-model="countdown">{{countdown}}s</button>
-                    </div>
-                    <Button style="width: 263px;height:40px;margin-top:25px;background:#329be5;border:none;" type="success" long @click="handleSubmit('loginIfon')">登录</Button>
-                    </Form>
-                </div>
-            </div>
+        	<div class="container">
+        		<div class="sqrm">
+					<img :src="src" >
+				</div>
+	            <div class="codeLogin" :class="{hide: 1 != loginType}">
+	                <div class="content">
+	                    <span>手机登录</span>
+	                    <Form ref="loginIfon" :model="loginIfon" :rules="ruleInline" inline>
+	                        <Form-item prop="phoneNumber">
+	                    <Input v-model="loginIfon.phoneNumber" placeholder="请输入手机号" style="width: 263px;height:40px;margin-top:25px;"></Input>
+	                            </Form-item>
+	                    <div class="sliderBox" v-bind:style="{background: bg,color:color}">
+	                    	<div id="slider" @mousedown="slideVerification" v-bind:style="{ left: ii + 'px'}"></div>{{con}}
+	                    </div>
+	                    <div class="verBox"><input id="p-code" v-model="loginIfon.phoneCode" placeholder="请输入手机验证码" type="text"></input>
+	                    	<button id="obtain-code" @click="getValidCode" v-if="isDisabled" style="outline:none;cursor:pointer;">获取验证码</button>
+	                    	<button id="obtain-code" @click="getValidCode" v-else disabled v-model="countdown">{{countdown}}s</button>
+	                    </div>
+	                    <Button style="width: 263px;height:40px;margin-top:25px;background:#329be5;border:none;" type="success" long @click="handleSubmit('loginIfon')">登录</Button>
+	                    </Form>
+	                </div>
+	            </div>
+	            <div class="clear"></div>
+        	</div>
+        	
         </div>
         <div class="footer">
         	<div class="foot-logo"><img src="../assets/images/foot-logo.png" alt=""/></div>
@@ -34,7 +38,9 @@
     </div>
 </template>
 <script  type="es6">
-	
+	import srcPath from '../assets/images/LOGO.png';
+	import src1 from '../assets/images/photo.png';
+	import src2 from '../assets/images/LOGO1.png'
     export default {
         name: 'yunLogin',
         data (){
@@ -42,6 +48,10 @@
                 phoneNumber: '',
                 phoneCode: '',
                 ii: 0,
+                con: '请按住滑块，拖动到最右边',
+                bg: '#e8e8e8',
+                color: '#9c9c9c',
+                src: srcPath,
                 loginIfon: {
                     phoneNumber: '',
                     phoneCode: ''
@@ -58,12 +68,13 @@
                         type: 'string',
                         message: '请输入正确的手机号',
                         pattern:  new RegExp("^1[3|4|5|7|8][0-9]{9}$"),
-                        trigger: 'blur'
+                         trigger: 'blur'
                     }]
                 }
             }
         },
         created: function(){
+        	console.log('preup');
         	var vm = this;
         	document.onmouseup = function(){
 		    	document.onmousemove = null;
@@ -72,7 +83,17 @@
 		        }else{
 		        	vm.ii = 0;
 		        }
-    		}	
+    		}
+       	    var i = 0;
+       	    var src=[srcPath,src1,src2];
+			function lun(){
+				i++;
+				if(i == 3){
+					i = 0;
+				}
+				vm.src = src[i];
+			}
+			var timer = setInterval(lun,5000);
         },
         methods: {
             switchLoginType: function (type) {
@@ -81,19 +102,37 @@
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     var userInfo = {
-                        'phone': this.loginIfon.phoneNumber
+                        'phone': this.loginIfon.phoneNumber,
+                        'password': this.loginIfon.password
                     }
                     if (valid) {
                         var vm = this;
-                        this.$jsonp('http://192.168.0.27:8081/test?jsoncallback=namedCb',{ name: 'namedCb' },function namedCb(err,data){
-                            if (err) {
-                                console.error(err.message);
-                            } else {
-                                console.log(data);
-                            }
-                        });
+                        vm.$store.state.userInfo = userInfo;
+                        this.$router.push('/register');
+                        this.$http.post('/japi/login',this.qs.stringify({
+                            phone: this.loginIfon.phoneNumber
+                        }))
+                                .then(function (response) {
+                                    console.log(response);
+                                    vm.$store.state.userInfo = userInfo;
+                                    this.$router.push('/register');
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
                     } else {
                         this.$Message.error('表单验证失败!');
+                        this.$http.post('/api/testPost', this.qs.stringify({
+                            firstName: '1',
+                            lastName: '2'
+                        }))
+                                .then(function (response) {
+                                    console.log(response.config.data);
+                                    console.log(response.data['1']);
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
                         console.log(this.$store.state.user.count);
                     }
                 })
@@ -108,32 +147,24 @@
             handleReset(val) {
                 console.log(val)
             },
-            getValidCode(name) {
+            getValidCode() {
                 console.log(this.phoneNumber);
                 console.log(this.loginIfon.phoneNumber);
                 console.log(22222);
-
-                //this.$refs[name].validate((valid) => {
-                //    if (valid) {
-                //        this.$Message.success('提交成功!');
-                //    } else {
-                //        this.$Message.error('表单验证失败!');
-                //    }
-                //})
                 this.isDisabled = false;
 
                 this.setTime();
-                this.$http.get('/javaapi/getCodeByPhone', {
+                this.$http.get('/javaapi/getCodeByPhone',{
                     params: {
                         phone: this.loginIfon.phoneNumber
                     }
                 })
-                        .then(function (response) {
-                            console.log(response);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             },
             setTime() {
@@ -161,24 +192,28 @@
                         });
             },
             slideVerification (e) {
-                var bb = e.clientX;
-                var vm = this;
-                document.onmousemove = function (e) {
-                    var dd = e.clientX;
-
-                    if (dd - bb > 0) {
-                        vm.ii = dd - bb;
-                    } else {
-                        vm.ii = 0;
-                        return;
-                    }
-                    if (vm.ii >= 213) {
-                        vm.ii = 213;
-                    }
-
-                }
+            	var bb = e.clientX;
+            	var vm = this;
+		       document.onmousemove = function(e){
+			       	var dd = e.clientX;
+			       	
+			       	if(dd-bb>0){
+			       		vm.ii = dd-bb;
+			       	}else{
+			       		vm.ii = 0;
+			       		return;
+			       	}
+			        if( vm.ii>=213 ){
+			          vm.ii = 213;
+			          vm.bg = '#7ac23c';
+			          vm.color = '#fff';
+			          vm.con = '验证通过';
+			          vm.slideVerification = null;
+			        }
+			        
+		       }
             	
-            }
+           }
         }
     }
     
@@ -200,8 +235,19 @@
     }
     .loginType {
     	height: 600px;
-        background: url("../assets/images/bodybg.png");
+        background: url("../assets/images/banner-bg.png");
         background-size: 100% 100%;
+    }
+    .container{
+    	width:1200px;
+    	margin: 0 auto;
+    }
+    .sqrm{
+    	width: 320px;
+    	height: 370px;
+    	float: left;
+    	margin-top: 40px;
+    	margin-left: 40px;
     }
     .codeLogin{
     	width: 320px;
@@ -209,7 +255,6 @@
     	background:#fff;
     	float: right;
     	margin-top: 114px;
-    	margin-right: 460px;
     }
     .content {
     	margin-top: 40px;
@@ -223,9 +268,12 @@
     .sliderBox{
     	width: 263px;
 	    height: 40px;
+	    line-height: 38px;
+	    font-size: 12px;
 	    margin: 25px auto 0;
-	    background: #e8e8e8;
 	    border-radius: 5px;
+	    position: relative;
+	    text-align: center;
     }
     #slider{
     	width: 50px;
@@ -233,6 +281,9 @@
 	    text-align: center;
 	    border-radius: 5px;
 	    background: url("../assets/images/slider.png") no-repeat;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
     }
     .verBox{
     	width: 263px;
@@ -274,7 +325,9 @@
     .footer p{
     	margin-top: 10px;
     }
-    
+    .clear{
+    	clear:both;
+    }
     
     .LoginTip {
         position: relative;
