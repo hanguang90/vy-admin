@@ -1,0 +1,29 @@
+[{
+  "text": "便民服务",
+  "iconKey": "icon-icon",
+  "key": "bmfwIndex"
+},{
+  "text": "政务服务",
+  "iconKey": "icon-zhengwu",
+  "key": "zwffIndex"
+},{
+  "text": "协同办公",
+  "iconKey": "icon-xietong",
+  "key": "4"
+},{
+  "text": "网站",
+  "iconKey": "icon-CMS",
+  "key": "5"
+},{
+  "text": "微信",
+  "iconKey": "icon-iconfontmoban",
+  "key": "1"
+},{
+  "text": "知识库",
+  "iconKey": "icon-zhishi1",
+  "key": "6"
+},{
+  "text": "系统设置",
+  "iconKey": "icon-xitong",
+  "key": "sysIndex"
+}]
